@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 File Upload and Playback</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(./Images/Baground.webp);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #uploadBtn,
+        #playBtn,
+        #predictBtn {
+            padding: 10px 40px;
+            margin: 10px;
+            background-color: #3495c5; /* Green */
+            border: none;
+            color: white;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        #uploadBtn:hover,
+        #playBtn:hover,
+        #predictBtn:hover {
+            background-color: #326ea3; /* Darker Green */
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        #audioPlayer {
+            display: none;
+            width: 420px;
+            margin-top: 20px;
+           
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        
+    </style>
+</head>
+<body >
+    <div id="container">
+        <input type="file" id="fileInput" accept=".mp3">
+        <label for="fileInput">
+            <button id="uploadBtn">Upload</button>
+        </label>
+        <button id="playBtn" disabled>Play</button>
+        <button id="predictBtn" disabled>Predict</button>
+        
+        <audio controls id="audioPlayer"></audio>
+    </div>
+
+    <script>
+        document.getElementById('uploadBtn').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+
+            alert('MP3 file selected successfully');
+            document.getElementById('playBtn').disabled = false;
+            document.getElementById('predictBtn').disabled = false;
+        });
+
+        document.getElementById('playBtn').addEventListener('click', function() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return;
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = URL.createObjectURL(file);
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+        });
+
+        document.getElementById('predictBtn').addEventListener('click', function() {
+            // Add your prediction logic here
+            alert('Predicting...');
+        });
+    </script>
+</body>
+</html>
